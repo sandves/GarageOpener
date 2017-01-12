@@ -19,7 +19,7 @@ namespace GarageOpener.Controllers
         [Route(nameof(Open))]
         public async Task<IActionResult> Open()
         {
-            await service.OpenAsync();
+                await service.OpenAsync();
             return Ok("Test");
         }
     }
