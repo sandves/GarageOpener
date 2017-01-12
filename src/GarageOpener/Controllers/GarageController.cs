@@ -20,7 +20,7 @@ namespace GarageOpener.Controllers
         public async Task<IActionResult> Open()
         {
                 await service.OpenAsync();
-            return Ok("Test");
+            return NoContent();
         }
     }
 }
