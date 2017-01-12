@@ -8,6 +8,6 @@ export class GarageService {
     constructor (private http: Http) {}
 
     openDoor() : void {
-        this.http.post(this.openGarageUrl, null);
+        this.http.post(this.openGarageUrl, null).map(res => res.json()).subscribe();
     }
 }

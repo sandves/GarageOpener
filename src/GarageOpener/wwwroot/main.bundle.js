@@ -156,7 +156,7 @@ var GarageService = (function () {
         this.openGarageUrl = '/api/garage/open'; // URL to web API
     }
     GarageService.prototype.openDoor = function () {
-        this.http.post(this.openGarageUrl, null);
+        this.http.post(this.openGarageUrl, null).map(function (res) { return res.json(); }).subscribe();
     };
     GarageService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Injectable */])(), 
