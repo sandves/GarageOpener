@@ -11,6 +11,6 @@ export class AppComponent {
   constructor (private garageService: GarageService) {}
 
   open() : void {
-    this.garageService.openDoor();
+    this.garageService.openDoor().subscribe(response => console.log(response));
   }
 }

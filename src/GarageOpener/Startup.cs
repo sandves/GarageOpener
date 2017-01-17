@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +17,12 @@ namespace GarageOpener
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddApplicationInsightsSettings(developerMode: true);
+            }
+
             Configuration = builder.Build();
         }
 
@@ -31,6 +33,8 @@ namespace GarageOpener
         {
             // Adds services required for using options.
             services.AddOptions();
+
+            services.AddApplicationInsightsTelemetry(Configuration);
 
             // Register the IConfiguration instance which MyOptions binds against.
             services.Configure<TwilioOptions>(Configuration.GetSection("Twilio"));
@@ -46,6 +50,12 @@ namespace GarageOpener
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            // Add Application Insights monitoring to the request pipeline as a very first middleware.
+            app.UseApplicationInsightsRequestTelemetry();
+
+            // Add Application Insights exceptions handling to the request pipeline.
+            app.UseApplicationInsightsExceptionTelemetry();
 
             app.Use(async (context, next) =>
             {
