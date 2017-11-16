@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../GarageOpener/wwwroot",
       "assets": [
         "assets",
         "favicon.ico"
