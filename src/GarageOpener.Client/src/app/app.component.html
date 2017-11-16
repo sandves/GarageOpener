@@ -1,9 +1,3 @@
-<md-toolbar color="primary">
-    Garage
-
-  <span class="app-toolbar-filler"></span>
-</md-toolbar>
-
-<div layout="row" layout-align="center center">
-  <button md-raised-button color="primary" style="display: block; margin: 100px auto 0 auto;" (click)="open()">Open door</button>
-</div>
+<button [disabled]="opening" (click)="open()" class='{{buttonClass}}'>
+  {{buttonText}}
+</button>
