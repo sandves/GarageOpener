@@ -21,11 +21,14 @@ export class AppComponent {
     this.buttonText = "Opening...";
     this.garageService.openDoor().subscribe(
       data => {
-        this.buttonClass = "success";
-        this.buttonText = "Drive!"
         setTimeout(() => {
-          this.buttonText = "Open";
+          this.buttonClass = "success";
+          this.buttonText = "Drive!"
           this.opening = false;
+          setTimeout(() => {
+            this.buttonText = "Open";
+            this.buttonClass = "default";
+          }, 3000);
         }, this.openingTime);
       },
       (err: HttpErrorResponse) => {
