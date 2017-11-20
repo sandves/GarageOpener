@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AppComponent {
   opening: boolean;
-  openingTime = 8000;
+  openingTime = 10000;
   buttonText = 'Open';
   buttonClass = 'default';
 
@@ -28,7 +28,7 @@ export class AppComponent {
           setTimeout(() => {
             this.buttonText = 'Open';
             this.buttonClass = 'default';
-          }, 3000);
+          }, 5000);
         }, this.openingTime);
       },
       (err: HttpErrorResponse) => {
